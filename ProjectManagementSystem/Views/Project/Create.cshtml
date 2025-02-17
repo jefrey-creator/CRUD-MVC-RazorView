@@ -1,0 +1,71 @@
+﻿@model ProjectManagementSystem.Models.ProjectModel
+
+@{
+    ViewBag.Title = "Create Project";
+}
+
+<h2 class="mb-3 mt-2">Create Project</h2>
+<div class="col-sm-12 col-lg-6 col-md-12">
+    <div class="card">
+        <div class="card-body">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ProjectName, "Project Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-12 col-lg-12 col-sm-12 mb-3">
+                            @Html.EditorFor(model => model.ProjectName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ProjectName, "Required fields", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ProjectCost, "Project Cost", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-12 col-lg-12 col-sm-12 mb-3">
+                            @Html.EditorFor(model => model.ProjectCost, new { htmlAttributes = new { @type = "number", @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ProjectCost, "Required fields", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ProjectStatus, "Status", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-12 col-lg-12 col-sm-12 mb-3">
+                            @Html.DropDownListFor(
+                                model => model.ProjectStatus,
+                                new SelectList(
+                                    new List<SelectListItem>
+                                    {
+                                        new SelectListItem { Text = "In progress", Value = "0" },
+                                        new SelectListItem { Text = "Done", Value = "1" },
+                                    },
+                                    "Value", "Text"
+                                ),
+                                new { @class = "form-control form-select" }
+)
+
+                            @Html.ValidationMessageFor(model => model.ProjectStatus, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="mt-3 gap-lg-4">
+                            @Html.ActionLink("Back to List", "Index", "", new { @class = "btn btn-secondary" })
+                            
+                            <button class="btn btn-primary" type="submit">
+                                Save 
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

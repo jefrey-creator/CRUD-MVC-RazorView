@@ -1,0 +1,47 @@
+﻿@model ProjectManagementSystem.Models.ProjectModel
+
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ProjectModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Project Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectName)
+        </dd>
+
+        <dt>
+            Project Cost
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectCost)
+        </dd>
+
+        <dt>
+            Project Status
+        </dt>
+
+        <dd>
+            @(Model.ProjectStatus == 1 ? "Done" : "In Progress")
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a href="/Project/Index" class="btn btn-secondary" role="button" title="Back to list">
+        <i class="bi bi-arrow-left-short"></i> Back to List
+    </a>
+
+
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ProjectId }, new { @class = "btn btn-primary" })
+</p>
